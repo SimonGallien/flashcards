@@ -13,7 +13,7 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
 ---
 
 ## 🚀 Fonctionnalités
-
+- Création automatique des tables (`themes`, `stats`, `cards`)
 
 ---
 
