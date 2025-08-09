@@ -3,7 +3,7 @@ import sqlite3
 
 def init_db():
     # Créer une connexion à la base de données
-    conn = sqlite3.connect("database.db")
+    conn = sqlite3.connect("flashcards.db")
 
     # Créer un curseur pour exécuter les requêtes SQL
     cursor = conn.cursor()

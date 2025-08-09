@@ -3,7 +3,7 @@ import sqlite3
 
 def insert_data():
     # Créer une connexion à la base de données
-    conn = sqlite3.connect("database.db")
+    conn = sqlite3.connect("flashcards.db")
     cursor = conn.cursor()
 
     print("Connexion à la base de données réussie")
