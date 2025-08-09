@@ -45,6 +45,7 @@ def init_db():
         );
         """
     )
+
     # Valider les modifications
     conn.commit()
     print("Tables créées avec succès")

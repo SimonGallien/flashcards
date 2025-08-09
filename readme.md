@@ -13,7 +13,41 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
 ---
 
 ## 🚀 Fonctionnalités
-- Création automatique des tables (`themes`, `stats`, `cards`)
+
+- Initialisation automatique de la base SQLite
+- Création des tables : `themes`, `stats`, `cards`
+- Activation des contraintes `FOREIGN KEY` (SQLite)
+- Insertion des **thèmes par défaut** :
+  - Python
+  - SQLite
+  - Git/GitHub
+  - Data visualisation
+  - EDA
+  - ML supervisé
+  - ML non supervisé
+  - Évaluation des modèles
+  - Optimisation des modèles
+  - Statistiques & probabilités
+  - Maths appliquées au ML
+  - Outils & workflow
+
+---
+
+### 📌 À venir
+- **CRUD complet pour les cartes** :
+  - `create_card()` → ajouter une carte
+  - `get_card()` → récupérer une carte par ID
+  - `update_card()` → modifier une carte existante
+  - `delete_card()` → supprimer une carte
+  - `get_all_cards()` → lister toutes les cartes
+  - `get_number_of_cards()` → obtenir le nombre total de cartes
+  - `get_cards_by_theme()` → filtrer par thème
+- Statistiques d’utilisation :
+  - Suivi du nombre de bonnes et mauvaises réponses
+  - Historique des révisions
+- Interface en ligne de commande (CLI) pour naviguer dans les cartes
+- (Optionnel) Interface graphique ou web
+- (Optionnel) Algorithme de répétition espacée (type SM-2)
 
 ---
 
