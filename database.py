@@ -1,16 +1,19 @@
 import sqlite3
 
 
-def create_tables():
+def init_db():
     # Créer une connexion à la base de données
     conn = sqlite3.connect("database.db")
 
     # Créer un curseur pour exécuter les requêtes SQL
     cursor = conn.cursor()
 
+    # Activer la vérification des contraintes FOREIGN KEY (désactivée par défaut en SQLite)
+    cursor.execute("PRAGMA foreign_keys = ON;")
+
     print("Connexion à la base de données réussie")
 
-    # Création des tables
+    # Création des tables et insertion des thèmes par défaut
     cursor.execute(
         """
             CREATE TABLE IF NOT EXISTS themes (
