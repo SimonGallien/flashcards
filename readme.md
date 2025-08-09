@@ -32,11 +32,13 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
   - Outils & workflow
 - CRUD pour les cartes :
   - `create_card()` → ajouter une carte
+  - `get_card()` → récupérer une carte par ID
+  
 ---
 
 ### 📌 À venir
 - **CRUD complet pour les cartes** :
-  - `get_card()` → récupérer une carte par ID
+  
   - `update_card()` → modifier une carte existante
   - `delete_card()` → supprimer une carte
   - `get_all_cards()` → lister toutes les cartes

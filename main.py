@@ -17,3 +17,10 @@ if __name__ == "__main__":
         0.5,
         2,  # 2 = SQLite
     )
+    card = get_card(1)
+    if card:
+        print(
+            f"ID: {card[0]}\nQuestion: {card[1]}\nRéponse: {card[2]}\nProbabilité : {card[3]}\nID Thème : {card[4]}"
+        )
+    else:
+        print("Carte introuvable.")

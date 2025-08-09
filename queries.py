@@ -28,3 +28,19 @@ def create_card(question, reponse, probabilite, id_theme):
     )
     conn.commit()
     conn.close()
+
+
+def get_card(id):
+    conn = sqlite3.connect("flashcards.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT * FROM cards
+        WHERE cardID = ?
+        """,
+        (id,),
+    )
+    card_select = cursor.fetchone()
+    conn.close()
+    return card_select
