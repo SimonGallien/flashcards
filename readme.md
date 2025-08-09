@@ -30,12 +30,12 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
   - Statistiques & probabilités
   - Maths appliquées au ML
   - Outils & workflow
-
+- CRUD pour les cartes :
+  - `create_card()` → ajouter une carte
 ---
 
 ### 📌 À venir
 - **CRUD complet pour les cartes** :
-  - `create_card()` → ajouter une carte
   - `get_card()` → récupérer une carte par ID
   - `update_card()` → modifier une carte existante
   - `delete_card()` → supprimer une carte
