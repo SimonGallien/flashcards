@@ -34,13 +34,12 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
 - CRUD pour les cartes :
   - `create_card()` → ajouter une carte
   - `get_card()` → récupérer une carte par ID
-  
+  - `update_card()` → modifier une carte existante
 ---
 
 ### 📌 À venir
 
 - **CRUD complet pour les cartes** :
-  - `update_card()` → modifier une carte existante
   - `delete_card()` → supprimer une carte
   - `get_all_cards()` → lister toutes les cartes
   - `get_number_of_cards()` → obtenir le nombre total de cartes

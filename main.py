@@ -24,3 +24,11 @@ if __name__ == "__main__":
         )
     else:
         print("Carte introuvable.")
+
+    update_card(
+        3,  # cardID
+        "Que fait la méthode .append() en Python ?",  # question
+        "Elle ajoute un élément à la fin d'une liste.",  # réponse
+        0.5,  # probabilité
+        1,  # id_theme (Python)
+    )
