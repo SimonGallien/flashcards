@@ -32,3 +32,5 @@ if __name__ == "__main__":
         0.5,  # probabilité
         1,  # id_theme (Python)
     )
+
+    delete_card(1)

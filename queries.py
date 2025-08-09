@@ -70,3 +70,23 @@ def update_card(cardID, question, reponse, probabilite, id_theme):
     conn.commit()
     conn.close()
     print("Carte mise à jour avec succès.")
+
+
+def delete_card(cardID):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("SELECT 1 FROM cards WHERE cardID = ?", (cardID,))
+    if cursor.fetchone() is None:
+        print("Cette carte n'existe pas, suppression ignorée.")
+        conn.close()
+        return
+    cursor.execute(
+        """
+        DELETE FROM cards
+        WHERE cardID = ?
+        """,
+        (cardID,),
+    )
+    conn.commit()
+    conn.close()
+    print("Carte supprimée avec succès.")
