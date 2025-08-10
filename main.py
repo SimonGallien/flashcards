@@ -33,4 +33,10 @@ if __name__ == "__main__":
         1,  # id_theme (Python)
     )
 
-    delete_card(1)
+    # delete_card(1)
+
+    allCards = get_all_cards()
+    for card in allCards:
+        print(
+            f"cardID : {card[0]}\n  question : {card[1]}\n  réponse : {card[2]}\n  probabilité : {card[3]}\n  id_theme : {card[4]}\n"
+        )

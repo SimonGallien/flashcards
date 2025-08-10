@@ -90,3 +90,13 @@ def delete_card(cardID):
     conn.commit()
     conn.close()
     print("Carte supprimée avec succès.")
+
+
+def get_all_cards():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM cards")
+    cards = cursor.fetchall()
+    conn.close()
+    print("Cartes récupérées avec succès.")
+    return cards
