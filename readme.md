@@ -8,6 +8,7 @@ carte apparaitra, et au contraire, plus vous avez du mal avec un concept, et plu
 fréquemment.
 
 ## 📌 Remarques
+
 Ce projet est en cours de développement. Le README sera mis à jour régulièrement.
 
 ---
@@ -37,19 +38,25 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
 ---
 
 ### 📌 À venir
+
 - **CRUD complet pour les cartes** :
-  
   - `update_card()` → modifier une carte existante
   - `delete_card()` → supprimer une carte
   - `get_all_cards()` → lister toutes les cartes
   - `get_number_of_cards()` → obtenir le nombre total de cartes
   - `get_cards_by_theme()` → filtrer par thème
-- Statistiques d’utilisation :
-  - Suivi du nombre de bonnes et mauvaises réponses
-  - Historique des révisions
-- Interface en ligne de commande (CLI) pour naviguer dans les cartes
-- (Optionnel) Interface graphique ou web
-- (Optionnel) Algorithme de répétition espacée (type SM-2)
+- **CRUD complet pour les thèmes** :
+  -`create_theme(theme)` → créer un thème
+  -`get_theme(id_theme)` → récupérer un thème
+  -`update_theme(id_theme, theme)` → modifier un theme existant
+  -`delete_theme(id_theme)` → supprimer un thème
+  -`get_all_themes()` → récupérer tous les thèmes
+- **CRUD complet pour les statistiques** :
+  -`update_stats(is_correct)` → mettre à jour la base stats suivant les indications ci-dessous
+  -`update_card_probability(cardID, is_correct)` → mettre à jour la probabilité d'apparition d'une carte
+  -`get_stats()` → récupérer les statistiques au travers du temps
+- **Interface graphique** :
+  -`Interface graphique avec streamlit`
 
 ---
 
