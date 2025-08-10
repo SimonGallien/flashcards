@@ -114,3 +114,19 @@ def get_number_of_cards():
     conn.close()
     print("Nombre de cartes récupéré avec succès.")
     return number_of_cards
+
+
+def get_cards_by_theme(id_theme):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT * FROM cards
+        WHERE id_theme = ?
+        """,
+        (id_theme,),
+    )
+    cards_by_theme = cursor.fetchall()
+    conn.close()
+    print("Cartes récupérées avec succès.")
+    return cards_by_theme

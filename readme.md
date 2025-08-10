@@ -31,20 +31,19 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
   - Statistiques & probabilités
   - Maths appliquées au ML
   - Outils & workflow
-- CRUD pour les cartes :
+- **CRUD complet pour les cartes** : :
   - `create_card()` → ajouter une carte
   - `get_card()` → récupérer une carte par ID
   - `update_card()` → modifier une carte existante
   - `delete_card()` → supprimer une carte
   - `get_all_cards()` → lister toutes les cartes
   - `get_number_of_cards()` → obtenir le nombre total de cartes
+  - `get_cards_by_theme()` → filtrer par thème
 
 ---
 
 ### 📌 À venir
-
-- **CRUD complet pour les cartes** :
-  - `get_cards_by_theme()` → filtrer par thème
+ 
 - **CRUD complet pour les thèmes** :
   -`create_theme(theme)` → créer un thème
   -`get_theme(id_theme)` → récupérer un thème

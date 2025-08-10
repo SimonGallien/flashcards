@@ -43,3 +43,7 @@ if __name__ == "__main__":
 
     number_of_cards = get_number_of_cards()
     print(f"Nombres de carte dans la base : {number_of_cards}")
+
+    cards_by_theme = get_cards_by_theme(1)
+    for card in cards_by_theme:
+        print(card)
