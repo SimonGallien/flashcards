@@ -40,3 +40,6 @@ if __name__ == "__main__":
         print(
             f"cardID : {card[0]}\n  question : {card[1]}\n  réponse : {card[2]}\n  probabilité : {card[3]}\n  id_theme : {card[4]}\n"
         )
+
+    number_of_cards = get_number_of_cards()
+    print(f"Nombres de carte dans la base : {number_of_cards}")

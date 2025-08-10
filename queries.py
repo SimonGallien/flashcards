@@ -100,3 +100,17 @@ def get_all_cards():
     conn.close()
     print("Cartes récupérées avec succès.")
     return cards
+
+
+def get_number_of_cards():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT COUNT(*) FROM cards
+        """
+    )
+    number_of_cards = cursor.fetchone()[0]
+    conn.close()
+    print("Nombre de cartes récupéré avec succès.")
+    return number_of_cards

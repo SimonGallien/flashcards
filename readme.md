@@ -37,13 +37,13 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
   - `update_card()` → modifier une carte existante
   - `delete_card()` → supprimer une carte
   - `get_all_cards()` → lister toutes les cartes
+  - `get_number_of_cards()` → obtenir le nombre total de cartes
 
 ---
 
 ### 📌 À venir
 
 - **CRUD complet pour les cartes** :
-  - `get_number_of_cards()` → obtenir le nombre total de cartes
   - `get_cards_by_theme()` → filtrer par thème
 - **CRUD complet pour les thèmes** :
   -`create_theme(theme)` → créer un thème
