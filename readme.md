@@ -39,13 +39,13 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
   - `get_all_cards()` → lister toutes les cartes
   - `get_number_of_cards()` → obtenir le nombre total de cartes
   - `get_cards_by_theme()` → filtrer par thème
-
+- **CRUD complet pour les thèmes** :
+  -`create_theme(theme)` → créer un thème
 ---
 
 ### 📌 À venir
  
 - **CRUD complet pour les thèmes** :
-  -`create_theme(theme)` → créer un thème
   -`get_theme(id_theme)` → récupérer un thème
   -`update_theme(id_theme, theme)` → modifier un theme existant
   -`delete_theme(id_theme)` → supprimer un thème

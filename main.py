@@ -47,3 +47,5 @@ if __name__ == "__main__":
     cards_by_theme = get_cards_by_theme(1)
     for card in cards_by_theme:
         print(card)
+
+    create_theme("PyTorch")

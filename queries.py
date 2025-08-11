@@ -3,7 +3,11 @@ import sqlite3
 DB_PATH = "flashcards.db"
 
 
-# Fonctions CRUD pour les Flashcards
+########################################################################
+################## Fonctions CRUD pour les flashcards ##################
+########################################################################
+
+
 def create_card(question, reponse, probabilite, id_theme):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
@@ -130,3 +134,23 @@ def get_cards_by_theme(id_theme):
     conn.close()
     print("Cartes récupérées avec succès.")
     return cards_by_theme
+
+
+####################################################################
+################## Fonctions CRUD pour les thèmes ##################
+####################################################################
+
+
+def create_theme(theme):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        INSERT INTO themes(theme)
+        VALUES (?)
+        """,
+        (theme,),
+    )
+    conn.commit()
+    conn.close()
+    print("Thème ajouté avec succès.")
