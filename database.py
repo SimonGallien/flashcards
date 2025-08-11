@@ -41,7 +41,8 @@ def init_db():
             question TEXT,
             reponse TEXT,
             probabilite REAL,
-            id_theme INTEGER, FOREIGN KEY(id_theme) REFERENCES themes(themeID) ON DELETE RESTRICT
+            id_theme INTEGER, 
+            FOREIGN KEY(id_theme) REFERENCES themes(themeID) ON DELETE RESTRICT
         );
         """
     )

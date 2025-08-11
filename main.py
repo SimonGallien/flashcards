@@ -49,3 +49,6 @@ if __name__ == "__main__":
         print(card)
 
     create_theme("PyTorch")
+
+    theme = get_theme(6)
+    print(f"Thème : {theme}")

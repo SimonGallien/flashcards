@@ -154,3 +154,23 @@ def create_theme(theme):
     conn.commit()
     conn.close()
     print("Thème ajouté avec succès.")
+
+
+def get_theme(id_theme):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT theme
+        FROM themes
+        WHERE themeID = ?
+        """,
+        (id_theme,),
+    )
+    theme = cursor.fetchone()
+    conn.close()
+    if theme is None:
+        print("Cette id_theme n'existe pas, requête ignorée.")
+        return None
+    print("Thème récupéré avec succès.")
+    return theme[0]
