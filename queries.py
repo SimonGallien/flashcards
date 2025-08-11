@@ -196,3 +196,24 @@ def update_theme(themeID, theme):
     conn.commit()
     conn.close()
     print("Mise à jour du thème effectuée.")
+
+
+def delete_theme(id_theme):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    # Check if id_theme exist
+    c.execute("SELECT 1 FROM themes WHERE themeID = ?", (id_theme,))
+    if c.fetchone() is None:
+        print("Cet id de thème n'existe pas, suppression annumlée.")
+        conn.close()
+        return
+    c.execute(
+        """
+        DELETE FROM themes
+        WHERE themeID = ?
+        """,
+        (id_theme,),
+    )
+    conn.commit()
+    conn.close()
+    print("Suppression du thème réussi.")

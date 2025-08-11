@@ -54,3 +54,5 @@ if __name__ == "__main__":
     print(f"Thème : {theme}")
 
     update_theme(25, "Keras")
+
+    delete_theme(3)

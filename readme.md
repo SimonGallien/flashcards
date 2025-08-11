@@ -43,14 +43,13 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
   -`create_theme(theme)` → créer un thème
   -`get_theme(id_theme)` → récupérer un thème
   -`update_theme(id_theme, theme)` → modifier un theme existant
-
+  -`delete_theme(id_theme)` → supprimer un thème
+  
 ---
 
 ### 📌 À venir
  
 - **CRUD complet pour les thèmes** :
-  -`update_theme(id_theme, theme)` → modifier un theme existant
-  -`delete_theme(id_theme)` → supprimer un thème
   -`get_all_themes()` → récupérer tous les thèmes
 - **CRUD complet pour les statistiques** :
   -`update_stats(is_correct)` → mettre à jour la base stats
