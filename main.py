@@ -48,7 +48,9 @@ if __name__ == "__main__":
     for card in cards_by_theme:
         print(card)
 
-    create_theme("PyTorch")
+    # create_theme("PyTorch")
 
     theme = get_theme(6)
     print(f"Thème : {theme}")
+
+    update_theme(25, "Keras")

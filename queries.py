@@ -174,3 +174,25 @@ def get_theme(id_theme):
         return None
     print("Thème récupéré avec succès.")
     return theme[0]
+
+
+def update_theme(themeID, theme):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    # Vérifier si le themeID existe déjà
+    cursor.execute("SELECT 1 FROM themes WHERE themeID = ?", (themeID,))
+    if cursor.fetchone() is None:
+        print("Cet ID n'existe pas, mise à jour ignorée.")
+        conn.close()
+        return
+    cursor.execute(
+        """
+        UPDATE themes
+        SET theme = ?
+        WHERE themeID = ?
+        """,
+        (theme, themeID),
+    )
+    conn.commit()
+    conn.close()
+    print("Mise à jour du thème effectuée.")
