@@ -201,6 +201,9 @@ def update_theme(themeID, theme):
 def delete_theme(id_theme):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
+    c.execute(
+        "PRAGMA foreign_keys = ON;"
+    )  # indispensable pour activer les clés étrangères
     # Check if id_theme exist
     c.execute("SELECT 1 FROM themes WHERE themeID = ?", (id_theme,))
     if c.fetchone() is None:
@@ -217,3 +220,17 @@ def delete_theme(id_theme):
     conn.commit()
     conn.close()
     print("Suppression du thème réussi.")
+
+
+def get_all_themes():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute(
+        """
+        SELECT * FROM themes
+        """
+    )
+    all_themes = c.fetchall()
+    conn.close()
+    print("Tout les thèmes sont récupérés.")
+    return all_themes

@@ -55,4 +55,8 @@ if __name__ == "__main__":
 
     update_theme(25, "Keras")
 
-    delete_theme(3)
+    delete_theme(1)
+
+    all_themes = get_all_themes()
+    for theme in all_themes:
+        print(theme)
