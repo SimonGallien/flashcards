@@ -45,13 +45,13 @@ Ce projet est en cours de développement. Le README sera mis à jour régulière
   -`update_theme(id_theme, theme)` → modifier un theme existant
   -`delete_theme(id_theme)` → supprimer un thème
   -`get_all_themes()` → récupérer tous les thèmes
-
+- **Fonctions pour les statistiques** :
+  -`update_stats(is_correct)` → mettre à jour la base stats
 ---
 
 ### 📌 À venir
  
 - **Fonctions pour les statistiques** :
-  -`update_stats(is_correct)` → mettre à jour la base stats
   -`update_card_probability(cardID, is_correct)` → mettre à jour la probabilité d'apparition d'une carte
   -`get_stats()` → récupérer les statistiques au travers du temps
 - **Interface graphique** :

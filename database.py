@@ -27,8 +27,8 @@ def init_db():
         """
             CREATE TABLE IF NOT EXISTS stats (
             statID INTEGER PRIMARY KEY,
-            bonne_reponses INTEGER,
-            mauvaise_reponses INTEGER,
+            bonnes_reponses INTEGER,
+            mauvaises_reponses INTEGER,
             date DATE
         );
         """

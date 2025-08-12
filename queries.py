@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 DB_PATH = "flashcards.db"
 
@@ -234,3 +235,57 @@ def get_all_themes():
     conn.close()
     print("Tout les thèmes sont récupérés.")
     return all_themes
+
+
+#####################################################################
+################## Fonctions pour les statistiques ##################
+#####################################################################
+
+
+def update_stats(is_correct):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    # Vérification de l'existence d'une entrée pour la date du jour
+    today = datetime.now().strftime("%Y-%m-%d")
+    c.execute(
+        """
+        SELECT statID, bonnes_reponses, mauvaises_reponses, date FROM stats
+        WHERE date = ?
+        """,
+        (today,),
+    )
+    stats = c.fetchone()
+
+    if stats is not None:  # Si une date du jour existe
+        statID = stats[0]
+        bonnes_reponses = stats[1]
+        mauvaises_reponses = stats[2]
+
+        # MAJ les bonnes/mauvaises réponses
+        if is_correct:
+            bonnes_reponses += 1
+        else:
+            mauvaises_reponses += 1
+        c.execute(
+            """
+            UPDATE stats
+            SET bonnes_reponses = ?, mauvaises_reponses = ?
+            WHERE statID = ?
+            """,
+            (bonnes_reponses, mauvaises_reponses, statID),
+        )
+
+    else:  # Si une date du jour n'existe pas
+        bonnes_reponses = 1 if is_correct else 0
+        mauvaises_reponses = 0 if is_correct else 1
+
+        c.execute(
+            """
+            INSERT INTO stats (bonnes_reponses, mauvaises_reponses, date)
+            VALUES (?, ?, ?)
+            """,
+            (bonnes_reponses, mauvaises_reponses, today),
+        )
+
+    conn.commit()
+    conn.close()

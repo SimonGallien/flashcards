@@ -60,3 +60,8 @@ if __name__ == "__main__":
     all_themes = get_all_themes()
     for theme in all_themes:
         print(theme)
+
+    update_stats(True)
+    update_stats(False)
+    update_stats(True)
+    update_stats(False)
