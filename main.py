@@ -70,3 +70,12 @@ if __name__ == "__main__":
     update_card_probability(1, True)
     update_card_probability(2, False)
     update_card_probability(2, False)
+
+    stats = get_stats()
+    print(f"\n🧮 Stats :")
+    print(
+        f"\n{'statID':<10} | {'bonnes_reponses':<20} | {'mauvaises_reponses':<20} | {'date'}"
+    )
+    print(70 * "-")
+    for stat in stats:
+        print(f"{stat[0]:<10} | {stat[1]:<20} | {stat[2]:<20} | {stat[3]}")

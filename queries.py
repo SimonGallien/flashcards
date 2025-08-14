@@ -327,3 +327,16 @@ def update_card_probability(cardID, is_correct):
     conn.commit()
     conn.close()
     print("Probabilité de la carte mise à jour avec succès.")
+
+
+def get_stats():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute(
+        """
+        SELECT * FROM stats
+        """
+    )
+    stats = c.fetchall()
+    conn.close()
+    return stats
