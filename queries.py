@@ -289,3 +289,41 @@ def update_stats(is_correct):
 
     conn.commit()
     conn.close()
+
+
+def update_card_probability(cardID, is_correct):
+    # Connexion à la BDD
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    # Récupère la probabilité actuelle
+    c.execute(
+        """
+        SELECT probabilite FROM cards
+        WHERE cardID = ?
+        """,
+        (cardID,),
+    )
+    resultat = c.fetchone()
+    # Test si la carte existe
+    if resultat is None:
+        conn.close()
+        print(f"La carte avec l'ID {cardID} n'existe pas, opération annulée.")
+        return
+    probabilite = resultat[0]
+    # Calcul de la nouvelle probabilité
+    if is_correct:
+        nouvelle_probabilite = max(0.1, min(probabilite * 0.9, 1.0))
+    else:
+        nouvelle_probabilite = max(0.1, min(probabilite * 1.1, 1.0))
+    # Mise à jour de la nouvelle probabilité dans la BDD
+    c.execute(
+        """
+        UPDATE cards
+        SET probabilite = ?
+        WHERE cardID = ?
+        """,
+        (nouvelle_probabilite, cardID),
+    )
+    conn.commit()
+    conn.close()
+    print("Probabilité de la carte mise à jour avec succès.")

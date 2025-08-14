@@ -65,3 +65,8 @@ if __name__ == "__main__":
     update_stats(False)
     update_stats(True)
     update_stats(False)
+
+    update_card_probability(1, True)
+    update_card_probability(1, True)
+    update_card_probability(2, False)
+    update_card_probability(2, False)
