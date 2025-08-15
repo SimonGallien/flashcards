@@ -99,13 +99,15 @@ def delete_card(cardID):
 
 
 def get_all_cards():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM cards")
-    cards = cursor.fetchall()
-    conn.close()
-    print("Cartes récupérées avec succès.")
-    return cards
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute("SELECT * FROM cards")
+            cards = c.fetchall()
+            print("\nCartes récupérées avec succès.")
+            return cards
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def get_number_of_cards():
