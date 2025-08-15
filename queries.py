@@ -79,23 +79,23 @@ def update_card(cardID, question, reponse, probabilite, id_theme):
 
 
 def delete_card(cardID):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("SELECT 1 FROM cards WHERE cardID = ?", (cardID,))
-    if cursor.fetchone() is None:
-        print("Cette carte n'existe pas, suppression ignorée.")
-        conn.close()
-        return
-    cursor.execute(
-        """
-        DELETE FROM cards
-        WHERE cardID = ?
-        """,
-        (cardID,),
-    )
-    conn.commit()
-    conn.close()
-    print("Carte supprimée avec succès.")
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute("SELECT 1 FROM cards WHERE cardID = ?", (cardID,))
+            if c.fetchone() is None:
+                print("\nCette carte n'existe pas, suppression ignorée.")
+                return
+            c.execute(
+                """
+                DELETE FROM cards
+                WHERE cardID = ?
+                """,
+                (cardID,),
+            )
+            print("\nCarte supprimée avec succès.")
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def get_all_cards():
