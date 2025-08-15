@@ -111,17 +111,19 @@ def get_all_cards():
 
 
 def get_number_of_cards():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        SELECT COUNT(*) FROM cards
-        """
-    )
-    number_of_cards = cursor.fetchone()[0]
-    conn.close()
-    print("Nombre de cartes récupéré avec succès.")
-    return number_of_cards
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute(
+                """
+                SELECT COUNT(*) FROM cards
+                """
+            )
+            number_of_cards = c.fetchone()[0]
+            print("\nNombre de cartes récupéré avec succès.")
+            return number_of_cards
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def get_cards_by_theme(id_theme):
