@@ -344,13 +344,15 @@ def update_card_probability(cardID, is_correct):
 
 
 def get_stats():
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute(
-        """
-        SELECT * FROM stats
-        """
-    )
-    stats = c.fetchall()
-    conn.close()
-    return stats
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute(
+                """
+                SELECT * FROM stats
+                """
+            )
+            stats = c.fetchall()
+            return stats
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
