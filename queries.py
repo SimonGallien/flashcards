@@ -21,7 +21,7 @@ def create_card(question, reponse, probabilite, id_theme):
                 "SELECT COUNT(*) FROM cards WHERE question = ?", (question,)
             )
             if c.fetchone()[0] > 0:
-                print("Cette carte existe déjà, insertion ignorée.")
+                print("\nCette carte existe déjà, insertion ignorée.")
                 return
 
             c.execute(
@@ -31,25 +31,27 @@ def create_card(question, reponse, probabilite, id_theme):
                 """,
                 (question, reponse, probabilite, id_theme),
             )
-            print("Carte créé avec succès.")
+            print("\nCarte créé avec succès.")
     except sqlite3.Error as e:
         print(f"Une erreur s'est produite {e}")
 
 
 def get_card(id):
-    conn = sqlite3.connect("flashcards.db")
-    cursor = conn.cursor()
-
-    cursor.execute(
-        """
-        SELECT * FROM cards
-        WHERE cardID = ?
-        """,
-        (id,),
-    )
-    card_select = cursor.fetchone()
-    conn.close()
-    return card_select
+    try:
+        with sqlite3.connect("flashcards.db") as conn:
+            c = conn.cursor()
+            c.execute(
+                """
+                SELECT * FROM cards
+                WHERE cardID = ?
+                """,
+                (id,),
+            )
+            card_select = c.fetchone()
+            print("\nCarte récupérée avec succès en utilisant son id.")
+            return card_select
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def update_card(cardID, question, reponse, probabilite, id_theme):
@@ -61,7 +63,7 @@ def update_card(cardID, question, reponse, probabilite, id_theme):
     # Vérifier si la question existe déjà
     cursor.execute("SELECT 1 FROM cards WHERE cardID = ?", (cardID,))
     if cursor.fetchone() is None:
-        print("Cette carte n'existe pas, mise à jour ignorée.")
+        print("\nCette carte n'existe pas, mise à jour ignorée.")
         conn.close()
         return
 
