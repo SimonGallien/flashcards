@@ -10,29 +10,30 @@ DB_PATH = "flashcards.db"
 
 
 def create_card(question, reponse, probabilite, id_theme):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    # Activer la vérification des clés étrangères (désactivée par défaut en SQLite)
-    cursor.execute("PRAGMA foreign_keys = ON;")
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            # Activer la vérification des clés étrangères (désactivée par défaut en SQLite)
+            c.execute("PRAGMA foreign_keys = ON;")
 
-    # Vérifier si la question existe déjà
-    cursor.execute(
-        "SELECT COUNT(*) FROM cards WHERE question = ?", (question,)
-    )
-    if cursor.fetchone()[0] > 0:
-        print("Cette carte existe déjà, insertion ignorée.")
-        conn.close()
-        return
+            # Vérifier si la question existe déjà
+            c.execute(
+                "SELECT COUNT(*) FROM cards WHERE question = ?", (question,)
+            )
+            if c.fetchone()[0] > 0:
+                print("Cette carte existe déjà, insertion ignorée.")
+                return
 
-    cursor.execute(
-        """
-        INSERT INTO cards(question, reponse, probabilite, id_theme) VALUES
-        (?, ?, ?, ?)
-        """,
-        (question, reponse, probabilite, id_theme),
-    )
-    conn.commit()
-    conn.close()
+            c.execute(
+                """
+                INSERT INTO cards(question, reponse, probabilite, id_theme) VALUES
+                (?, ?, ?, ?)
+                """,
+                (question, reponse, probabilite, id_theme),
+            )
+            print("Carte créé avec succès.")
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def get_card(id):
@@ -292,41 +293,43 @@ def update_stats(is_correct):
 
 
 def update_card_probability(cardID, is_correct):
-    # Connexion à la BDD
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    # Récupère la probabilité actuelle
-    c.execute(
-        """
-        SELECT probabilite FROM cards
-        WHERE cardID = ?
-        """,
-        (cardID,),
-    )
-    resultat = c.fetchone()
-    # Test si la carte existe
-    if resultat is None:
-        conn.close()
-        print(f"La carte avec l'ID {cardID} n'existe pas, opération annulée.")
-        return
-    probabilite = resultat[0]
-    # Calcul de la nouvelle probabilité
-    if is_correct:
-        nouvelle_probabilite = max(0.1, min(probabilite * 0.9, 1.0))
-    else:
-        nouvelle_probabilite = max(0.1, min(probabilite * 1.1, 1.0))
-    # Mise à jour de la nouvelle probabilité dans la BDD
-    c.execute(
-        """
-        UPDATE cards
-        SET probabilite = ?
-        WHERE cardID = ?
-        """,
-        (nouvelle_probabilite, cardID),
-    )
-    conn.commit()
-    conn.close()
-    print("Probabilité de la carte mise à jour avec succès.")
+    try:
+        # Connexion à la BDD
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            # Récupère la probabilité actuelle
+            c.execute(
+                """
+                SELECT probabilite FROM cards
+                WHERE cardID = ?
+                """,
+                (cardID,),
+            )
+            resultat = c.fetchone()
+            # Test si la carte existe
+            if resultat is None:
+                print(
+                    f"La carte avec l'ID {cardID} n'existe pas, opération annulée."
+                )
+                return
+            probabilite = resultat[0]
+            # Calcul de la nouvelle probabilité
+            if is_correct:
+                nouvelle_probabilite = max(0.1, min(probabilite * 0.9, 1.0))
+            else:
+                nouvelle_probabilite = max(0.1, min(probabilite * 1.1, 1.0))
+            # Mise à jour de la nouvelle probabilité dans la BDD
+            c.execute(
+                """
+                UPDATE cards
+                SET probabilite = ?
+                WHERE cardID = ?
+                """,
+                (nouvelle_probabilite, cardID),
+            )
+            print("Probabilité de la carte mise à jour avec succès.")
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def get_stats():
