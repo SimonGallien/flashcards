@@ -55,29 +55,27 @@ def get_card(id):
 
 
 def update_card(cardID, question, reponse, probabilite, id_theme):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    # Activer la vérification des clés étrangères (désactivée par défaut en SQLite)
-    cursor.execute("PRAGMA foreign_keys = ON;")
-
-    # Vérifier si la question existe déjà
-    cursor.execute("SELECT 1 FROM cards WHERE cardID = ?", (cardID,))
-    if cursor.fetchone() is None:
-        print("\nCette carte n'existe pas, mise à jour ignorée.")
-        conn.close()
-        return
-
-    cursor.execute(
-        """
-        UPDATE cards
-        SET question = ?, reponse = ?, probabilite = ?, id_theme = ?
-        WHERE cardID = ?
-        """,
-        (question, reponse, probabilite, id_theme, cardID),
-    )
-    conn.commit()
-    conn.close()
-    print("Carte mise à jour avec succès.")
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            # Activer la vérification des clés étrangères (désactivée par défaut en SQLite)
+            c.execute("PRAGMA foreign_keys = ON;")
+            # Vérifier si la question existe déjà
+            c.execute("SELECT 1 FROM cards WHERE cardID = ?", (cardID,))
+            if c.fetchone() is None:
+                print("\nCette carte n'existe pas, mise à jour ignorée.")
+                return
+            c.execute(
+                """
+                UPDATE cards
+                SET question = ?, reponse = ?, probabilite = ?, id_theme = ?
+                WHERE cardID = ?
+                """,
+                (question, reponse, probabilite, id_theme, cardID),
+            )
+            print("\nCarte mise à jour avec succès.")
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def delete_card(cardID):
