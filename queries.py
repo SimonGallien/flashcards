@@ -150,98 +150,103 @@ def get_cards_by_theme(id_theme):
 
 
 def create_theme(theme):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        INSERT INTO themes(theme)
-        VALUES (?)
-        """,
-        (theme,),
-    )
-    conn.commit()
-    conn.close()
-    print("Thème ajouté avec succès.")
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute(
+                """
+                INSERT INTO themes(theme)
+                VALUES (?)
+                """,
+                (theme,),
+            )
+            print("\nThème ajouté avec succès.")
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def get_theme(id_theme):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        SELECT theme
-        FROM themes
-        WHERE themeID = ?
-        """,
-        (id_theme,),
-    )
-    theme = cursor.fetchone()
-    conn.close()
-    if theme is None:
-        print("Cette id_theme n'existe pas, requête ignorée.")
-        return None
-    print("Thème récupéré avec succès.")
-    return theme[0]
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute(
+                """
+                SELECT theme
+                FROM themes
+                WHERE themeID = ?
+                """,
+                (id_theme,),
+            )
+            theme = c.fetchone()
+            if theme is None:
+                print("\nCette id_theme n'existe pas, requête ignorée.")
+                return None
+            print("\nThème récupéré avec succès.")
+            return theme[0]
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def update_theme(themeID, theme):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    # Vérifier si le themeID existe déjà
-    cursor.execute("SELECT 1 FROM themes WHERE themeID = ?", (themeID,))
-    if cursor.fetchone() is None:
-        print("Cet ID n'existe pas, mise à jour ignorée.")
-        conn.close()
-        return
-    cursor.execute(
-        """
-        UPDATE themes
-        SET theme = ?
-        WHERE themeID = ?
-        """,
-        (theme, themeID),
-    )
-    conn.commit()
-    conn.close()
-    print("Mise à jour du thème effectuée.")
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            # Vérifier si le themeID existe déjà
+            c.execute("SELECT 1 FROM themes WHERE themeID = ?", (themeID,))
+            if c.fetchone() is None:
+                print("\nCet ID n'existe pas, mise à jour ignorée.")
+                return
+            c.execute(
+                """
+                UPDATE themes
+                SET theme = ?
+                WHERE themeID = ?
+                """,
+                (theme, themeID),
+            )
+            print("\nMise à jour du thème effectuée.")
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def delete_theme(id_theme):
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute(
-        "PRAGMA foreign_keys = ON;"
-    )  # indispensable pour activer les clés étrangères
-    # Check if id_theme exist
-    c.execute("SELECT 1 FROM themes WHERE themeID = ?", (id_theme,))
-    if c.fetchone() is None:
-        print("Cet id de thème n'existe pas, suppression annumlée.")
-        conn.close()
-        return
-    c.execute(
-        """
-        DELETE FROM themes
-        WHERE themeID = ?
-        """,
-        (id_theme,),
-    )
-    conn.commit()
-    conn.close()
-    print("Suppression du thème réussi.")
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute(
+                "PRAGMA foreign_keys = ON;"
+            )  # indispensable pour activer les clés étrangères
+            # Check if id_theme exist
+            c.execute("SELECT 1 FROM themes WHERE themeID = ?", (id_theme,))
+            if c.fetchone() is None:
+                print("\nCet id de thème n'existe pas, suppression annumlée.")
+                return
+            c.execute(
+                """
+                DELETE FROM themes
+                WHERE themeID = ?
+                """,
+                (id_theme,),
+            )
+            print("\nSuppression du thème réussi.")
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 def get_all_themes():
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute(
-        """
-        SELECT * FROM themes
-        """
-    )
-    all_themes = c.fetchall()
-    conn.close()
-    print("Tout les thèmes sont récupérés.")
-    return all_themes
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            c = conn.cursor()
+            c.execute(
+                """
+                SELECT * FROM themes
+                """
+            )
+            all_themes = c.fetchall()
+            print("\nTout les thèmes sont récupérés.")
+            return all_themes
+    except sqlite3.Error as e:
+        print(f"Une erreur s'est produite {e}")
 
 
 #####################################################################
